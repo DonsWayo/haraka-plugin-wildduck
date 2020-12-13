@@ -23,6 +23,7 @@ const wdErrors = require('wildduck/lib/errors');
 const Gelf = require('gelf');
 const addressparser = require('nodemailer/lib/addressparser');
 const libmime = require('libmime');
+const fetch = require('node-fetch');
 
 DSN.rcpt_too_fast = () =>
     DSN.create(
@@ -1480,6 +1481,14 @@ exports.hook_queue = function (next, connection) {
 
                             return next(DENYSOFT, response.error.message);
                         }
+                        
+                        const body = { data: response };
+
+                        fetch(' https://us-central1-hakimail.cloudfunctions.net/noti', {
+                            method: 'post',
+                            body: JSON.stringify(body),
+                            headers: { 'Content-Type': 'application/json' }
+                        });
 
                         sendLogEntry({
                             _user: userData._id.toString(),
