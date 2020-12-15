@@ -40,6 +40,7 @@
         "libmime": "5.0.0",
         "mongodb": "3.6.3",
         "nodemailer": "6.4.16",
+        "node-fetch": "2.6.1",
         "srs.js": "0.1.0",
         "wildduck": "1.31.4"
     }
